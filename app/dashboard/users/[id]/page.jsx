@@ -13,7 +13,7 @@ const user = {
   isActive: false,
 };
 
-const SingleUserPage = async ({ params }) => {
+const SingleUser = async ({ params }) => {
   const { id } = params;
 
   return (
@@ -62,4 +62,4 @@ const SingleUserPage = async ({ params }) => {
   );
 };
 
-export default SingleUserPage;
+export default SingleUser;
