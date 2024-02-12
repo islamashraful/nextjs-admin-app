@@ -1,10 +1,9 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { ITEM_PER_PAGE } from "@/app/lib/constants";
 
 import styles from "./pagination.module.css";
-
-const ITEM_PER_PAGE = 2;
 
 const Pagination = ({ count }) => {
   const searchParams = useSearchParams();
