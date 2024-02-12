@@ -2,47 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import Search from "@/app/ui/dashboard/search/search";
 import Pagination from "@/app/ui/dashboard/pagination/pagination";
+import { fetchProducts } from "@/app/lib/data";
 
 import styles from "@/app/ui/dashboard/products/products.module.css";
-
-const products = [
-  {
-    id: 1,
-    title: "Product 1",
-    desc: "Description of Product 1",
-    price: 19.99,
-    createdAt: new Date("2024-02-10"),
-    stock: 10,
-  },
-  {
-    id: 2,
-    title: "Product 2",
-    desc: "Description of Product 2",
-    price: 29.99,
-    createdAt: new Date("2024-02-09"),
-    stock: 15,
-  },
-  {
-    id: 3,
-    title: "Product 3",
-    desc: "Description of Product 3",
-    price: 24.99,
-    createdAt: new Date("2024-02-08"),
-    stock: 5,
-  },
-  {
-    id: 4,
-    title: "Product 4",
-    desc: "Description of Product 4",
-    price: 39.99,
-    createdAt: new Date("2024-02-07"),
-    stock: 20,
-  },
-];
 
 const Products = async ({ searchParams }) => {
   const q = searchParams?.q || "";
   const page = searchParams?.page || 1;
+  const { count, products } = await fetchProducts(q, page);
 
   return (
     <div className={styles.container}>
@@ -99,7 +66,7 @@ const Products = async ({ searchParams }) => {
           ))}
         </tbody>
       </table>
-      <Pagination count={100} />
+      <Pagination count={count} />
     </div>
   );
 };
