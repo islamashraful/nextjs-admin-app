@@ -6,8 +6,10 @@ import Pagination from "@/app/ui/dashboard/pagination/pagination";
 import styles from "@/app/ui/dashboard/users/users.module.css";
 import { fetchUsers } from "@/app/lib/data";
 
-const Users = async () => {
-  const { users } = await fetchUsers();
+const Users = async ({ searchParams }) => {
+  const q = searchParams?.q || "";
+
+  const { users } = await fetchUsers(q);
 
   return (
     <div className={styles.container}>
