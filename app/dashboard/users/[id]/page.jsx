@@ -1,31 +1,24 @@
 import Image from "next/image";
+import { fetchUser } from "@/app/lib/data";
+import { updateUser } from "@/app/lib/actions";
 
 import styles from "@/app/ui/dashboard/users/singleUser/singleUser.module.css";
 
-const user = {
-  id: "12312",
-  username: "ashraful",
-  email: "ashraful@gmail.com",
-  phone: "12321",
-  address:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, quas!",
-  isAdmin: false,
-  isActive: false,
-};
-
 const SingleUser = async ({ params }) => {
   const { id } = params;
+
+  const user = await fetchUser(id);
 
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
         <div className={styles.imgContainer}>
-          <Image src={"/noavatar.png"} alt="" fill />
+          <Image src={user.img || "/noavatar.png"} alt="" fill />
         </div>
-        {"ashraful"}
+        {user.username}
       </div>
       <div className={styles.formContainer}>
-        <form action="" className={styles.form}>
+        <form action={updateUser} className={styles.form}>
           <input type="hidden" name="id" value={user.id} />
           <label>Username</label>
           <input type="text" name="username" placeholder={user.username} />
