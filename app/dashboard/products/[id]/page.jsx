@@ -1,17 +1,13 @@
 import Image from "next/image";
+import { fetchProduct } from "@/app/lib/data";
+import { updateProduct } from "@/app/lib/actions";
 
 import styles from "@/app/ui/dashboard/products/singleProduct/singleProduct.module.css";
 
 const SingleProduct = async ({ params }) => {
   const { id } = params;
 
-  const product = {
-    id: "12312",
-    title: "Product 1",
-    price: 121,
-    stock: 1,
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non earum perspiciatis temporibus, nesciunt recusandae fugiat molestias voluptatem dicta itaque a nam sit doloribus aliquid numquam? Ipsum repudiandae debitis tempore est!",
-  };
+  const product = await fetchProduct(id);
 
   return (
     <div className={styles.container}>
@@ -22,7 +18,7 @@ const SingleProduct = async ({ params }) => {
         {product.title}
       </div>
       <div className={styles.formContainer}>
-        <form action="" className={styles.form}>
+        <form action={updateProduct} className={styles.form}>
           <input type="hidden" name="id" value={product.id} />
           <label>Title</label>
           <input type="text" name="title" placeholder={product.title} />
