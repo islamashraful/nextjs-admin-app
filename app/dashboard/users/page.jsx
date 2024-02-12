@@ -4,17 +4,11 @@ import Search from "@/app/ui/dashboard/search/search";
 import Pagination from "@/app/ui/dashboard/pagination/pagination";
 
 import styles from "@/app/ui/dashboard/users/users.module.css";
+import { fetchUsers } from "@/app/lib/data";
 
-const users = [
-  {
-    email: "john.doe@gmail.com",
-    createdAt: "31.01.2024",
-    isAdmin: false,
-    isActive: false,
-  },
-];
+const Users = async () => {
+  const { users } = await fetchUsers();
 
-const Users = () => {
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -50,7 +44,7 @@ const Users = () => {
                 </div>
               </td>
               <td>{user.email}</td>
-              <td>{user.createdAt}</td>
+              <td>{user.createdAt?.toString().slice(4, 16)}</td>
               <td>{user.isAdmin ? "Admin" : "Client"}</td>
               <td>{user.isActive ? "active" : "passive"}</td>
               <td>

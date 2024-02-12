@@ -17,7 +17,7 @@ const Dashboard = () => {
                 number: 10121,
                 change: 12,
               }}
-              key={item.id}
+              key={item}
             />
           ))}
         </div>
